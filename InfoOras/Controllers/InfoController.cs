@@ -22,7 +22,11 @@ namespace InfoOras.Controllers
         // GET: Info/Details/5
         public ActionResult Details(int id)
         {
-   return View(Interogare(id));
+   OrasViewModel orasVM = new OrasViewModel();
+
+   orasVM = dbml.Oras.Select(x => new OrasViewModel { ID = x.ID, Oras = x.Oras, Lat = x.Lat, Long = x.Long, Judet = x.Judet.Judet1, JudetID = x.JudetID }).FirstOrDefault();
+
+   return View(orasVM);
   }
 
         // GET: Info/Create
@@ -36,9 +40,7 @@ namespace InfoOras.Controllers
         [HttpPost]
         public ActionResult Create(string Oras, decimal? Lat, decimal? Long)
         {
-        
-   List<Ora> genericOras = dbml.Oras.Where(x=>x.Oras == Oras).ToList();
-    if (genericOras.Count == 0)
+    if (checkOras(Oras).Count == 0)
     {
      oras.Oras = Oras;
      oras.Lat = Lat;
@@ -56,7 +58,10 @@ namespace InfoOras.Controllers
 
    }
        
-             
+      public List<Ora> checkOras(string checkName) {
+   List<Ora> genericOras = dbml.Oras.Where(x => x.Oras == checkName).ToList();
+   return genericOras;
+  }
       
 
         public ActionResult Edit(int id)
@@ -71,13 +76,22 @@ namespace InfoOras.Controllers
         {
 
    // TODO: Add update logic here
-   oras = Interogare(id);
-   oras.Oras = collection.Oras;
+   if (checkOras(collection.Oras).Count == 0)
+   {
+    oras = Interogare(id);
+    oras.Oras = collection.Oras;
     dbml.SubmitChanges();
-   return RedirectToAction("Index");
+    return RedirectToAction("Index");
+   }
+   else
+   {
+    ModelState.AddModelError("Oras", "City already exists!");
+    return View();
+   }
   }
 
   public Ora Interogare(int IDElement) {
+   // Judet judet = dbml.Judets;
    oras = dbml.Oras.Where(o => o.ID == IDElement).FirstOrDefault();
    return oras;
   }

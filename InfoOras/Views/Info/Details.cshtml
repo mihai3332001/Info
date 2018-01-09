@@ -1,42 +1,55 @@
-﻿@model InfoOras.Models.Ora
+﻿
+@model InfoOras.Models.OrasViewModel
+
 
 @{
-    ViewBag.Title = "Details";
+ ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
 <div>
-    <h4>Ora</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Oras)
-        </dt>
+ <h4>Details City</h4>
+ <hr />
 
-        <dd>
-            @Html.DisplayFor(model => model.Oras)
-        </dd>
+ <ul class="navbar-nav mr-auto">
+  <li class="nav-item">@Html.ActionLink("Transport", "Index", "Tramsport", new { id = Model.ID }, null)</li>
+ </ul>
+ <dl class="dl-horizontal">
+  <dt>
+   @Html.DisplayNameFor(model => model.Oras)
+  </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Lat)
-        </dt>
+  <dd>
+   @Html.DisplayFor(model => model.Oras)
+  </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Lat)
-        </dd>
+  <dt>
+   @Html.DisplayNameFor(model => model.Judet)
+  </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Long)
-        </dt>
+  <dd>
+   @Html.DisplayFor(model => model.Judet)
+  </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Long)
-        </dd>
+  <dt>
+   @Html.DisplayNameFor(model => model.Lat)
+  </dt>
 
-    </dl>
+  <dd>
+   @Html.DisplayFor(model => model.Lat)
+  </dd>
+
+  <dt>
+   @Html.DisplayNameFor(model => model.Long)
+  </dt>
+
+  <dd>
+   @Html.DisplayFor(model => model.Long)
+  </dd>
+
+ </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+ @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+ @Html.ActionLink("Back to List", "Index")
 </p>
