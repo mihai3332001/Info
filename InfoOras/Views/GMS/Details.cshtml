@@ -9,9 +9,6 @@
 <table class="table">
  <tr>
   <th>
-   @Html.DisplayNameFor(model => model.Name)
-  </th>
-  <th>
    @Html.DisplayNameFor(model => model.Pret)
   </th>
   <th>
@@ -24,9 +21,7 @@
  @foreach (var item in Model)
  {
   <tr>
-   <td>
-    @Html.DisplayFor(modelItem => item.Name)
-   </td>
+
    <td>
     @Html.DisplayFor(modelItem => item.Pret)
    </td>
@@ -39,5 +34,11 @@
  }
 
 </table>
+<p>
+ @{
+ int idSession = Convert.ToInt32(Session["orasID"]);
+ }
+ @Html.ActionLink("Back to List", "Index", "Gms", new { id = idSession }, null)
+</p>
 
 

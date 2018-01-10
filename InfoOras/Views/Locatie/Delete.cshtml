@@ -1,4 +1,4 @@
-﻿@model InfoOras.Models.Transport
+﻿@model InfoOras.Models.Locatie
 
 @{
     ViewBag.Title = "Delete";
@@ -8,7 +8,7 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Transport</h4>
+    <h4>Locatie</h4>
     <hr />
     <dl class="dl-horizontal">
 
@@ -29,7 +29,7 @@
      <input type="submit" value="Delete" class="btn btn-default" /> |
      @{ int idSession = Convert.ToInt32(Session["orasID"]);
      }
-     @Html.ActionLink("Back to List", "Index", "Tramsport", new { id = idSession }, null)
+     @Html.ActionLink("Back to List", "Index", "Locatie", new { id = idSession }, null)
     </div>
     }
 </div>

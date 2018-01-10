@@ -40,6 +40,12 @@ namespace InfoOras.Controllers
         [HttpPost]
         public ActionResult Create(string Oras, decimal? Lat, decimal? Long)
         {
+
+   if (ModelState.IsValidField("Oras") && string.IsNullOrEmpty(Oras))
+   {
+    ModelState.AddModelError("Oras", "Campul este gol");
+    return View();
+   }
     if (checkOras(Oras).Count == 0)
     {
      oras.Oras = Oras;

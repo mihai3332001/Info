@@ -11,7 +11,7 @@ namespace InfoOras.Models
 
   public int? GMSID { get; set; }
 
-  public int TransportID { get; set; }
+  public int? TransportID { get; set; }
 
   public decimal Pret { get; set; }
 

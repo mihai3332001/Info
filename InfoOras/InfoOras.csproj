@@ -149,8 +149,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InfoController.cs" />
+    <Compile Include="Controllers\LocatieController.cs" />
     <Compile Include="Controllers\TramsportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,6 +221,15 @@
     <Content Include="Views\Tramsport\Create.cshtml" />
     <Content Include="Views\Tramsport\Edit.cshtml" />
     <Content Include="Views\Tramsport\Delete.cshtml" />
+    <Content Include="Views\GMS\Index.cshtml" />
+    <Content Include="Views\GMS\Details.cshtml" />
+    <Content Include="Views\GMS\Create.cshtml" />
+    <Content Include="Views\GMS\Edit.cshtml" />
+    <Content Include="Views\GMS\Delete.cshtml" />
+    <Content Include="Views\Locatie\Index.cshtml" />
+    <Content Include="Views\Locatie\Create.cshtml" />
+    <Content Include="Views\Locatie\Edit.cshtml" />
+    <Content Include="Views\Locatie\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

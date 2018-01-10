@@ -27,8 +27,10 @@ namespace InfoOras.Controllers
         // GET: Tramsport
         public ActionResult Index(int id)
         {
-
+   Transport transpID = dbmlTransport.Transports.Where(t => t.OrasID == id).FirstOrDefault();
+   System.Web.HttpContext.Current.Session["orasID"] = transpID.OrasID;
    List<Transport> transportID = dbmlTransport.Transports.Where(t => t.OrasID == id).ToList();
+
             return View(transportID);
         }
 
@@ -43,25 +45,27 @@ namespace InfoOras.Controllers
         // GET: Tramsport/Create
         public ActionResult Create()
         {
-            return View();
+  
+   return View();
         }
 
         // POST: Tramsport/Create
         [HttpPost]
-        public ActionResult Create(Transport collection, int id)
+        public ActionResult Create(Transport collection)
         {
    if (transportList(collection.Name).Count() == 0)
    {
+    int sessionID = Convert.ToInt32(Session["orasID"]);
     trans.Name = collection.Name;
-    trans.OrasID = collection.ID;
+    trans.OrasID = sessionID;
     //trans.OrasID = id;
     dbmlTransport.Transports.InsertOnSubmit(trans);
     dbmlTransport.SubmitChanges();
-    return RedirectToAction("Index");
+    return RedirectToAction("Index", "Tramsport", new { id = sessionID });
    }
    else
    {
-    ModelState.AddModelError("Oras", "City already exists!");
+    ModelState.AddModelError("Transport", "Exista deja!");
     return View();
    }
   }
@@ -97,7 +101,9 @@ namespace InfoOras.Controllers
         // GET: Tramsport/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(transport(id));
+   int sessionID = Convert.ToInt32(Session["orasID"]);
+
+   return View(transport(id));
         }
 
         // POST: Tramsport/Delete/5
@@ -106,12 +112,14 @@ namespace InfoOras.Controllers
         {
             try
             {
-    // TODO: Add delete logic here
+   
+    int sessionID = Convert.ToInt32(Session["orasID"]);
     trans = transport(id);
+   
     dbmlTransport.Transports.DeleteOnSubmit(trans);
     dbmlTransport.SubmitChanges();
-                return RedirectToAction("Index");
-            }
+                return RedirectToAction("Index", "Tramsport", new { id = sessionID });
+   }
             catch
             {
                 return View();
