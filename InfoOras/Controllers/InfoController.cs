@@ -15,7 +15,7 @@ namespace InfoOras.Controllers
   // GET: Info
   public ActionResult Index()
         {
-   listOra = dbml.Oras.Where(x=>x.Oras != null).ToList();
+   listOra = dbml.Oras.OrderBy(x=>x.Oras).ToList();
             return View(listOra);
         }
 
@@ -32,13 +32,25 @@ namespace InfoOras.Controllers
         // GET: Info/Create
         public ActionResult Create()
         {
+   //listOra = dbml.Oras.OrderBy(x => x.Judet.Judet1).ToList();
+   //List<SelectListItem> li = new List<SelectListItem>();
+   //foreach (Ora list in listOra) {
+   // li.Add(new SelectListItem
+   // {
+   //  Text = list.Judet.Judet1,
+   //  Value = list.Judet.ID
+   // });
+   //}
 
+   //ViewData["Judet"] = li;
+   List<Judet> judet = dbml.Judets.OrderBy(x => x.Judet1).ToList();
+   ViewData["Judet"] = new SelectList(judet, "ID", "Judet1");
    return View();
         }
 
         // POST: Info/Create
         [HttpPost]
-        public ActionResult Create(string Oras, decimal? Lat, decimal? Long)
+        public ActionResult Create(string Oras, decimal? Lat, decimal? Long, FormCollection form)
         {
 
    if (ModelState.IsValidField("Oras") && string.IsNullOrEmpty(Oras))
@@ -48,11 +60,14 @@ namespace InfoOras.Controllers
    }
     if (checkOras(Oras).Count == 0)
     {
+
      oras.Oras = Oras;
+    oras.JudetID = Convert.ToInt32(form["ID"]);
      oras.Lat = Lat;
      oras.Long = Long;
      dbml.Oras.InsertOnSubmit(oras);
      dbml.SubmitChanges();
+    TempData["Message"] = "Oras adaugat!";
      return RedirectToAction("Index");
     // TODO: Add insert logic here
    }
@@ -87,6 +102,7 @@ namespace InfoOras.Controllers
     oras = Interogare(id);
     oras.Oras = collection.Oras;
     dbml.SubmitChanges();
+    TempData["Message"] = "Oras updatat";
     return RedirectToAction("Index");
    }
    else
@@ -121,6 +137,7 @@ namespace InfoOras.Controllers
     // TODO: Add delete logic here
     dbml.Oras.DeleteOnSubmit(oras);
     dbml.SubmitChanges();
+    TempData["Message"] = "Oras sters";
                 return RedirectToAction("Index");
             }
             catch

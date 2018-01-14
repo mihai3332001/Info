@@ -1,27 +1,40 @@
 ﻿@model IEnumerable<InfoOras.Models.Ora>
 
 @{
-    ViewBag.Title = "Index";
+ ViewBag.Title = "Index";
+}
+
+@{if(TempData["Message"] != null)
+ {
+<div class="alert alert-warning alert-dismissible" role="alert">
+ <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+ </button>
+@TempData["Message"]
+</div>
+ }
+
 }
 
 <h2>Orase</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+ @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
- 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Oras)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+
+ @foreach (var item in Model)
+ {
+  <tr>
+   <td>
+    @Html.DisplayFor(modelItem => item.Oras)
+   </td>
+   <td>
+    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+   </td>
+  </tr>
+ }
 
 </table>

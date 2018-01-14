@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.25, 8.5" name="CtiesDBML">
+  <DataContextMoniker Name="/CtiesDBMLDataContext" />
+  <nestedChildShapes>
+    <classShape Id="054bdb33-e4e4-4a74-9d3a-5eea2bc8dc79" absoluteBounds="9, 2.25, 2, 1.7708968098958335">
+      <DataClassMoniker Name="/CtiesDBMLDataContext/Bilet" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3fccee0b-0b57-4493-92a7-b96e8c54c831" absoluteBounds="9.015, 2.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fc588e6e-da38-4e91-a685-2527b3cbf9dc" absoluteBounds="6.25, 1.375, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/CtiesDBMLDataContext/Transport" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2287fc2b-0927-4a9a-a885-ffe02fb618b4" absoluteBounds="6.265, 1.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e1892a65-1117-483f-9c42-3d3ded2c27a5" absoluteBounds="6.25, 3.5, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/CtiesDBMLDataContext/GM" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0f3ae45f-17d0-48d2-a1b1-8225db95b3e1" absoluteBounds="6.265, 3.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3a96ddd4-87e9-45af-b6e7-fc74446e1ed5" absoluteBounds="0.75, 3.5, 2, 1.193992513020834">
+      <DataClassMoniker Name="/CtiesDBMLDataContext/Judet" />
+      <nestedChildShapes>
+        <elementListCompartment Id="84f020cd-a1a3-4323-8f9c-419aeeed8d44" absoluteBounds="0.765, 3.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8a26c0f3-1a22-4174-b631-af695e17bb90" absoluteBounds="6.25, 5.625, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/CtiesDBMLDataContext/Locatie" />
+      <nestedChildShapes>
+        <elementListCompartment Id="693385af-ecc0-4c20-aca4-14732ba76829" absoluteBounds="6.265, 6.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e132735e-c57f-42c8-802e-7654e9c1d44d" absoluteBounds="3.5, 3.25, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/CtiesDBMLDataContext/Ora" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c1de47a3-3051-479c-9b7d-409eeaff467c" absoluteBounds="3.515, 3.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.25 : 2.50564697265625); (9 : 2.50564697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CtiesDBMLDataContext/Transport/Transport_Bilet" />
+      <nodes>
+        <classShapeMoniker Id="fc588e6e-da38-4e91-a685-2527b3cbf9dc" />
+        <classShapeMoniker Id="054bdb33-e4e4-4a74-9d3a-5eea2bc8dc79" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 3.76044840494792); (9 : 3.76044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CtiesDBMLDataContext/GM/GM_Bilet" />
+      <nodes>
+        <classShapeMoniker Id="e1892a65-1117-483f-9c42-3d3ded2c27a5" />
+        <classShapeMoniker Id="054bdb33-e4e4-4a74-9d3a-5eea2bc8dc79" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.5 : 3.25); (4.5 : 2.06814697265625); (6.25 : 2.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CtiesDBMLDataContext/Ora/Ora_Transport" />
+      <nodes>
+        <classShapeMoniker Id="e132735e-c57f-42c8-802e-7654e9c1d44d" />
+        <classShapeMoniker Id="fc588e6e-da38-4e91-a685-2527b3cbf9dc" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.19314697265625); (6.25 : 4.19314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CtiesDBMLDataContext/Ora/Ora_GM" />
+      <nodes>
+        <classShapeMoniker Id="e132735e-c57f-42c8-802e-7654e9c1d44d" />
+        <classShapeMoniker Id="e1892a65-1117-483f-9c42-3d3ded2c27a5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.5 : 5.02089680989583); (4.5 : 6.31814697265625); (6.25 : 6.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CtiesDBMLDataContext/Ora/Ora_Locatie" />
+      <nodes>
+        <classShapeMoniker Id="e132735e-c57f-42c8-802e-7654e9c1d44d" />
+        <classShapeMoniker Id="8a26c0f3-1a22-4174-b631-af695e17bb90" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.09699625651042); (3.5 : 4.09699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CtiesDBMLDataContext/Judet/Judet_Ora" />
+      <nodes>
+        <classShapeMoniker Id="3a96ddd4-87e9-45af-b6e7-fc74446e1ed5" />
+        <classShapeMoniker Id="e132735e-c57f-42c8-802e-7654e9c1d44d" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

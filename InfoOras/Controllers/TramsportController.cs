@@ -61,6 +61,7 @@ namespace InfoOras.Controllers
     //trans.OrasID = id;
     dbmlTransport.Transports.InsertOnSubmit(trans);
     dbmlTransport.SubmitChanges();
+    TempData["Message"] = "Linie RATC adaugata";
     return RedirectToAction("Index", "Tramsport", new { id = sessionID });
    }
    else
@@ -88,6 +89,7 @@ namespace InfoOras.Controllers
      trans.Name= collection.Name;
 
     dbmlTransport.SubmitChanges();
+    TempData["Message"] = "Linie RATC modificata";
      return RedirectToAction("Index", "Tramsport", new { id = trans.ID });
     }
     else
@@ -118,6 +120,7 @@ namespace InfoOras.Controllers
    
     dbmlTransport.Transports.DeleteOnSubmit(trans);
     dbmlTransport.SubmitChanges();
+    TempData["Message"] = "Linie RATC stearsa";
                 return RedirectToAction("Index", "Tramsport", new { id = sessionID });
    }
             catch

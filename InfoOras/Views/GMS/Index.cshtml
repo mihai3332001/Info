@@ -1,31 +1,41 @@
 ﻿@model IEnumerable<InfoOras.Models.GM>
-
+@{
+ if (TempData["Message"] != null)
+ {
+  <div class="alert alert-warning alert-dismissible" role="alert">
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+   </button>
+   @TempData["Message"]
+  </div>
+ }
+}
 <p>
-    @Html.ActionLink("Create New", "Create")
+ @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.GMS)
-        </th>
-        <th></th>
-    </tr>
+ <tr>
+  <th>
+   @Html.DisplayNameFor(model => model.GMS)
+  </th>
+  <th></th>
+ </tr>
  @if (Model != null)
  {
-foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.GMS)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-        </td>
-    </tr>
-}
-}
+  foreach (var item in Model)
+  {
+   <tr>
+    <td>
+     @Html.DisplayFor(modelItem => item.GMS)
+    </td>
+    <td>
+     @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+     @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+     @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+    </td>
+   </tr>
+  }
+ }
 
 </table>
 

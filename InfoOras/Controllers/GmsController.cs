@@ -61,6 +61,7 @@ namespace InfoOras.Controllers
     //trans.OrasID = id;
     dbmlGMS.GMs.InsertOnSubmit(newGM);
     dbmlGMS.SubmitChanges();
+    TempData["Message"] = "GMS Adaugat!";
     return RedirectToAction("Index", new { id = sessionID });
    }
    else
@@ -86,6 +87,7 @@ namespace InfoOras.Controllers
     newGM = singleGM(id);
     newGM.GMS = collection.GMS;
     dbmlGMS.SubmitChanges();
+    TempData["Message"] = "Gms modificat!";
     return RedirectToAction("Index", new { id = sessionID });
    }
    else
@@ -112,6 +114,7 @@ namespace InfoOras.Controllers
 
     dbmlGMS.GMs.DeleteOnSubmit(newGM);
     dbmlGMS.SubmitChanges();
+    TempData["Message"] = "GMS sters!";
     return RedirectToAction("Index", new { id = sessionID });
    }
             catch

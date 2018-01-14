@@ -58,6 +58,7 @@ namespace InfoOras.Controllers
     newLoc.OrasID = sessionID;
     dbmlLocatie.Locaties.InsertOnSubmit(newLoc);
     dbmlLocatie.SubmitChanges();
+    TempData["Message"] = "Locatie adaugata!";
     return RedirectToAction("Index", new { id = sessionID });
    }
    else
@@ -84,6 +85,7 @@ namespace InfoOras.Controllers
     newLoc.Name = collection.Name;
     newLoc.OrasID = sessionID;
     dbmlLocatie.SubmitChanges();
+    TempData["Message"] = "Locatie modificata";
     return RedirectToAction("Index", new { id = sessionID });
    }
    else
@@ -109,6 +111,7 @@ namespace InfoOras.Controllers
     newLoc = newLocation(id);
     dbmlLocatie.Locaties.DeleteOnSubmit(newLoc);
     dbmlLocatie.SubmitChanges();
+    TempData["Message"] = "Locatie stearsa";
     return RedirectToAction("Index", new { id = sessionID });
    }
             catch
