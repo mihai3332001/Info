@@ -20,16 +20,16 @@ namespace Orase.Controllers
 
   CtiesDBMLDataContext citiesDBML = new CtiesDBMLDataContext();
   List<OraseModels> orasVM = new List<OraseModels>();
-  public OraseController()
-  {
-   
-  }
-  [HttpGet]
-  public List<OraseModels> GetOrase()
-  {
 
-   orasVM = citiesDBML.Oras.Select(o => new OraseModels { ID = o.intID, Orase = o.intOras, Lat = o.intLat, Long = o.intLong, JudetID = o.intJudetID, Judet1 = o.intJudet1 }).ToList();
-   return orasVM;
+  [HttpGet]
+  public IEnumerable<OraseModels> GetOrase()
+  {
+  IEnumerable<OraseModels> city = citiesDBML.Oras.Select(o => new OraseModels { ID = o.ID, Orase = o.Oras, Lat = o.Lat, Long = o.Long, JudetID = o.JudetID, Judet1 = o.Judet.Judet1 }).AsEnumerable();
+   return city;
   }
+  public OraseModels Get(int id) {
+   return null;
   }
+
+ }
 }

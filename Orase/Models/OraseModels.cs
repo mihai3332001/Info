@@ -27,24 +27,5 @@ namespace Orase.Models
 
 
 
- public partial class Ora
- {
-
-  [DataMember]
-  public int intID { get; set; }
-  [DataMember]
-  public int intJudetID { get; set; }
-  [DataMember]
-  public string intOras { get; set; }
-  [DataMember]
-  public string intJudet1 { get; set; }
-  [DataMember]
-  public Nullable<decimal> intLat { get; set; }
-  [DataMember]
-  public Nullable<decimal> intLong { get; set; }
-
-  [DataMember]
-  public virtual Judet intJudet { get; set; }
- }
 
 }
