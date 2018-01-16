@@ -7,6 +7,7 @@ namespace InfoOras.Models
 {
  public class BiletViewModel
  {
+
   public int ID { get; set; }
 
   public int? GMSID { get; set; }

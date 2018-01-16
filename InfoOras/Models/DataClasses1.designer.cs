@@ -20,7 +20,6 @@ namespace InfoOras.Models
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
- using System.ComponentModel.DataAnnotations;
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="City")]
@@ -31,12 +30,6 @@ namespace InfoOras.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertJudet(Judet instance);
-    partial void UpdateJudet(Judet instance);
-    partial void DeleteJudet(Judet instance);
-    partial void InsertOra(Ora instance);
-    partial void UpdateOra(Ora instance);
-    partial void DeleteOra(Ora instance);
     partial void InsertBilet(Bilet instance);
     partial void UpdateBilet(Bilet instance);
     partial void DeleteBilet(Bilet instance);
@@ -46,9 +39,15 @@ namespace InfoOras.Models
     partial void InsertGM(GM instance);
     partial void UpdateGM(GM instance);
     partial void DeleteGM(GM instance);
+    partial void InsertJudet(Judet instance);
+    partial void UpdateJudet(Judet instance);
+    partial void DeleteJudet(Judet instance);
     partial void InsertLocatie(Locatie instance);
     partial void UpdateLocatie(Locatie instance);
     partial void DeleteLocatie(Locatie instance);
+    partial void InsertOra(Ora instance);
+    partial void UpdateOra(Ora instance);
+    partial void DeleteOra(Ora instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -81,22 +80,6 @@ namespace InfoOras.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Judet> Judets
-		{
-			get
-			{
-				return this.GetTable<Judet>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Ora> Oras
-		{
-			get
-			{
-				return this.GetTable<Ora>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Bilet> Bilets
 		{
 			get
@@ -121,12 +104,626 @@ namespace InfoOras.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<Judet> Judets
+		{
+			get
+			{
+				return this.GetTable<Judet>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Locatie> Locaties
 		{
 			get
 			{
 				return this.GetTable<Locatie>();
 			}
+		}
+		
+		public System.Data.Linq.Table<Ora> Oras
+		{
+			get
+			{
+				return this.GetTable<Ora>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Bilet")]
+	public partial class Bilet : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _GMSID;
+		
+		private System.Nullable<int> _TransportID;
+		
+		private decimal _Pret;
+		
+		private string _Timp;
+		
+		private EntityRef<Transport> _Transport;
+		
+		private EntityRef<GM> _GM;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnGMSIDChanging(System.Nullable<int> value);
+    partial void OnGMSIDChanged();
+    partial void OnTransportIDChanging(System.Nullable<int> value);
+    partial void OnTransportIDChanged();
+    partial void OnPretChanging(decimal value);
+    partial void OnPretChanged();
+    partial void OnTimpChanging(string value);
+    partial void OnTimpChanged();
+    #endregion
+		
+		public Bilet()
+		{
+			this._Transport = default(EntityRef<Transport>);
+			this._GM = default(EntityRef<GM>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GMSID", DbType="Int")]
+		public System.Nullable<int> GMSID
+		{
+			get
+			{
+				return this._GMSID;
+			}
+			set
+			{
+				if ((this._GMSID != value))
+				{
+					if (this._GM.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGMSIDChanging(value);
+					this.SendPropertyChanging();
+					this._GMSID = value;
+					this.SendPropertyChanged("GMSID");
+					this.OnGMSIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransportID", DbType="Int")]
+		public System.Nullable<int> TransportID
+		{
+			get
+			{
+				return this._TransportID;
+			}
+			set
+			{
+				if ((this._TransportID != value))
+				{
+					if (this._Transport.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTransportIDChanging(value);
+					this.SendPropertyChanging();
+					this._TransportID = value;
+					this.SendPropertyChanged("TransportID");
+					this.OnTransportIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pret", DbType="Decimal(5,2) NOT NULL")]
+		public decimal Pret
+		{
+			get
+			{
+				return this._Pret;
+			}
+			set
+			{
+				if ((this._Pret != value))
+				{
+					this.OnPretChanging(value);
+					this.SendPropertyChanging();
+					this._Pret = value;
+					this.SendPropertyChanged("Pret");
+					this.OnPretChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Timp", DbType="NVarChar(128)")]
+		public string Timp
+		{
+			get
+			{
+				return this._Timp;
+			}
+			set
+			{
+				if ((this._Timp != value))
+				{
+					this.OnTimpChanging(value);
+					this.SendPropertyChanging();
+					this._Timp = value;
+					this.SendPropertyChanged("Timp");
+					this.OnTimpChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transport_Bilet", Storage="_Transport", ThisKey="TransportID", OtherKey="ID", IsForeignKey=true)]
+		public Transport Transport
+		{
+			get
+			{
+				return this._Transport.Entity;
+			}
+			set
+			{
+				Transport previousValue = this._Transport.Entity;
+				if (((previousValue != value) 
+							|| (this._Transport.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Transport.Entity = null;
+						previousValue.Bilets.Remove(this);
+					}
+					this._Transport.Entity = value;
+					if ((value != null))
+					{
+						value.Bilets.Add(this);
+						this._TransportID = value.ID;
+					}
+					else
+					{
+						this._TransportID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Transport");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GM_Bilet", Storage="_GM", ThisKey="GMSID", OtherKey="ID", IsForeignKey=true)]
+		public GM GM
+		{
+			get
+			{
+				return this._GM.Entity;
+			}
+			set
+			{
+				GM previousValue = this._GM.Entity;
+				if (((previousValue != value) 
+							|| (this._GM.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._GM.Entity = null;
+						previousValue.Bilets.Remove(this);
+					}
+					this._GM.Entity = value;
+					if ((value != null))
+					{
+						value.Bilets.Add(this);
+						this._GMSID = value.ID;
+					}
+					else
+					{
+						this._GMSID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("GM");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Transport")]
+	public partial class Transport : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private int _OrasID;
+		
+		private string _Name;
+		
+		private EntitySet<Bilet> _Bilets;
+		
+		private EntityRef<Ora> _Ora;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnOrasIDChanging(int value);
+    partial void OnOrasIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public Transport()
+		{
+			this._Bilets = new EntitySet<Bilet>(new Action<Bilet>(this.attach_Bilets), new Action<Bilet>(this.detach_Bilets));
+			this._Ora = default(EntityRef<Ora>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrasID", DbType="Int NOT NULL")]
+		public int OrasID
+		{
+			get
+			{
+				return this._OrasID;
+			}
+			set
+			{
+				if ((this._OrasID != value))
+				{
+					if (this._Ora.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOrasIDChanging(value);
+					this.SendPropertyChanging();
+					this._OrasID = value;
+					this.SendPropertyChanged("OrasID");
+					this.OnOrasIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transport_Bilet", Storage="_Bilets", ThisKey="ID", OtherKey="TransportID")]
+		public EntitySet<Bilet> Bilets
+		{
+			get
+			{
+				return this._Bilets;
+			}
+			set
+			{
+				this._Bilets.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ora_Transport", Storage="_Ora", ThisKey="OrasID", OtherKey="ID", IsForeignKey=true)]
+		public Ora Ora
+		{
+			get
+			{
+				return this._Ora.Entity;
+			}
+			set
+			{
+				Ora previousValue = this._Ora.Entity;
+				if (((previousValue != value) 
+							|| (this._Ora.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Ora.Entity = null;
+						previousValue.Transports.Remove(this);
+					}
+					this._Ora.Entity = value;
+					if ((value != null))
+					{
+						value.Transports.Add(this);
+						this._OrasID = value.ID;
+					}
+					else
+					{
+						this._OrasID = default(int);
+					}
+					this.SendPropertyChanged("Ora");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Bilets(Bilet entity)
+		{
+			this.SendPropertyChanging();
+			entity.Transport = this;
+		}
+		
+		private void detach_Bilets(Bilet entity)
+		{
+			this.SendPropertyChanging();
+			entity.Transport = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GMS")]
+	public partial class GM : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private int _OrasID;
+		
+		private short _GMS;
+		
+		private EntitySet<Bilet> _Bilets;
+		
+		private EntityRef<Ora> _Ora;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnOrasIDChanging(int value);
+    partial void OnOrasIDChanged();
+    partial void OnGMSChanging(short value);
+    partial void OnGMSChanged();
+    #endregion
+		
+		public GM()
+		{
+			this._Bilets = new EntitySet<Bilet>(new Action<Bilet>(this.attach_Bilets), new Action<Bilet>(this.detach_Bilets));
+			this._Ora = default(EntityRef<Ora>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrasID", DbType="Int NOT NULL")]
+		public int OrasID
+		{
+			get
+			{
+				return this._OrasID;
+			}
+			set
+			{
+				if ((this._OrasID != value))
+				{
+					if (this._Ora.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOrasIDChanging(value);
+					this.SendPropertyChanging();
+					this._OrasID = value;
+					this.SendPropertyChanged("OrasID");
+					this.OnOrasIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GMS", DbType="SmallInt NOT NULL")]
+		public short GMS
+		{
+			get
+			{
+				return this._GMS;
+			}
+			set
+			{
+				if ((this._GMS != value))
+				{
+					this.OnGMSChanging(value);
+					this.SendPropertyChanging();
+					this._GMS = value;
+					this.SendPropertyChanged("GMS");
+					this.OnGMSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GM_Bilet", Storage="_Bilets", ThisKey="ID", OtherKey="GMSID")]
+		public EntitySet<Bilet> Bilets
+		{
+			get
+			{
+				return this._Bilets;
+			}
+			set
+			{
+				this._Bilets.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ora_GM", Storage="_Ora", ThisKey="OrasID", OtherKey="ID", IsForeignKey=true)]
+		public Ora Ora
+		{
+			get
+			{
+				return this._Ora.Entity;
+			}
+			set
+			{
+				Ora previousValue = this._Ora.Entity;
+				if (((previousValue != value) 
+							|| (this._Ora.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Ora.Entity = null;
+						previousValue.GMs.Remove(this);
+					}
+					this._Ora.Entity = value;
+					if ((value != null))
+					{
+						value.GMs.Add(this);
+						this._OrasID = value.ID;
+					}
+					else
+					{
+						this._OrasID = default(int);
+					}
+					this.SendPropertyChanged("Ora");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Bilets(Bilet entity)
+		{
+			this.SendPropertyChanging();
+			entity.GM = this;
+		}
+		
+		private void detach_Bilets(Bilet entity)
+		{
+			this.SendPropertyChanging();
+			entity.GM = null;
 		}
 	}
 	
@@ -244,6 +841,157 @@ namespace InfoOras.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Locatie")]
+	public partial class Locatie : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private int _OrasID;
+		
+		private string _Name;
+		
+		private EntityRef<Ora> _Ora;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnOrasIDChanging(int value);
+    partial void OnOrasIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public Locatie()
+		{
+			this._Ora = default(EntityRef<Ora>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrasID", DbType="Int NOT NULL")]
+		public int OrasID
+		{
+			get
+			{
+				return this._OrasID;
+			}
+			set
+			{
+				if ((this._OrasID != value))
+				{
+					if (this._Ora.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOrasIDChanging(value);
+					this.SendPropertyChanging();
+					this._OrasID = value;
+					this.SendPropertyChanged("OrasID");
+					this.OnOrasIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ora_Locatie", Storage="_Ora", ThisKey="OrasID", OtherKey="ID", IsForeignKey=true)]
+		public Ora Ora
+		{
+			get
+			{
+				return this._Ora.Entity;
+			}
+			set
+			{
+				Ora previousValue = this._Ora.Entity;
+				if (((previousValue != value) 
+							|| (this._Ora.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Ora.Entity = null;
+						previousValue.Locaties.Remove(this);
+					}
+					this._Ora.Entity = value;
+					if ((value != null))
+					{
+						value.Locaties.Add(this);
+						this._OrasID = value.ID;
+					}
+					else
+					{
+						this._OrasID = default(int);
+					}
+					this.SendPropertyChanged("Ora");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Oras")]
 	public partial class Ora : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -338,8 +1086,6 @@ namespace InfoOras.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Oras", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
-  [Required]
-  [MaxLength(50, ErrorMessage ="Prea multe caractere")]
 		public string Oras
 		{
 			get
@@ -526,760 +1272,6 @@ namespace InfoOras.Models
 		{
 			this.SendPropertyChanging();
 			entity.Ora = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Bilet")]
-	public partial class Bilet : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private System.Nullable<int> _GMSID;
-		
-		private int _TransportID;
-		
-		private decimal _Pret;
-		
-		private string _Timp;
-		
-		private EntityRef<Transport> _Transport;
-		
-		private EntityRef<GM> _GM;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnGMSIDChanging(System.Nullable<int> value);
-    partial void OnGMSIDChanged();
-    partial void OnTransportIDChanging(int value);
-    partial void OnTransportIDChanged();
-    partial void OnPretChanging(decimal value);
-    partial void OnPretChanged();
-    partial void OnTimpChanging(string value);
-    partial void OnTimpChanged();
-    #endregion
-		
-		public Bilet()
-		{
-			this._Transport = default(EntityRef<Transport>);
-			this._GM = default(EntityRef<GM>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GMSID", DbType="Int")]
-		public System.Nullable<int> GMSID
-		{
-			get
-			{
-				return this._GMSID;
-			}
-			set
-			{
-				if ((this._GMSID != value))
-				{
-					if (this._GM.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnGMSIDChanging(value);
-					this.SendPropertyChanging();
-					this._GMSID = value;
-					this.SendPropertyChanged("GMSID");
-					this.OnGMSIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransportID", DbType="Int NOT NULL")]
-		public int TransportID
-		{
-			get
-			{
-				return this._TransportID;
-			}
-			set
-			{
-				if ((this._TransportID != value))
-				{
-					if (this._Transport.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnTransportIDChanging(value);
-					this.SendPropertyChanging();
-					this._TransportID = value;
-					this.SendPropertyChanged("TransportID");
-					this.OnTransportIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pret", DbType="Decimal(5,2) NOT NULL")]
-		public decimal Pret
-		{
-			get
-			{
-				return this._Pret;
-			}
-			set
-			{
-				if ((this._Pret != value))
-				{
-					this.OnPretChanging(value);
-					this.SendPropertyChanging();
-					this._Pret = value;
-					this.SendPropertyChanged("Pret");
-					this.OnPretChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Timp", DbType="NVarChar(128)")]
-		public string Timp
-		{
-			get
-			{
-				return this._Timp;
-			}
-			set
-			{
-				if ((this._Timp != value))
-				{
-					this.OnTimpChanging(value);
-					this.SendPropertyChanging();
-					this._Timp = value;
-					this.SendPropertyChanged("Timp");
-					this.OnTimpChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transport_Bilet", Storage="_Transport", ThisKey="TransportID", OtherKey="ID", IsForeignKey=true)]
-		public Transport Transport
-		{
-			get
-			{
-				return this._Transport.Entity;
-			}
-			set
-			{
-				Transport previousValue = this._Transport.Entity;
-				if (((previousValue != value) 
-							|| (this._Transport.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Transport.Entity = null;
-						previousValue.Bilets.Remove(this);
-					}
-					this._Transport.Entity = value;
-					if ((value != null))
-					{
-						value.Bilets.Add(this);
-						this._TransportID = value.ID;
-					}
-					else
-					{
-						this._TransportID = default(int);
-					}
-					this.SendPropertyChanged("Transport");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GM_Bilet", Storage="_GM", ThisKey="GMSID", OtherKey="ID", IsForeignKey=true)]
-		public GM GM
-		{
-			get
-			{
-				return this._GM.Entity;
-			}
-			set
-			{
-				GM previousValue = this._GM.Entity;
-				if (((previousValue != value) 
-							|| (this._GM.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._GM.Entity = null;
-						previousValue.Bilets.Remove(this);
-					}
-					this._GM.Entity = value;
-					if ((value != null))
-					{
-						value.Bilets.Add(this);
-						this._GMSID = value.ID;
-					}
-					else
-					{
-						this._GMSID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("GM");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Transport")]
-	public partial class Transport : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private int _OrasID;
-		
-		private string _Name;
-		
-		private EntitySet<Bilet> _Bilets;
-		
-		private EntityRef<Ora> _Ora;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnOrasIDChanging(int value);
-    partial void OnOrasIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public Transport()
-		{
-			this._Bilets = new EntitySet<Bilet>(new Action<Bilet>(this.attach_Bilets), new Action<Bilet>(this.detach_Bilets));
-			this._Ora = default(EntityRef<Ora>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrasID", DbType="Int NOT NULL")]
-		public int OrasID
-		{
-			get
-			{
-				return this._OrasID;
-			}
-			set
-			{
-				if ((this._OrasID != value))
-				{
-					if (this._Ora.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnOrasIDChanging(value);
-					this.SendPropertyChanging();
-					this._OrasID = value;
-					this.SendPropertyChanged("OrasID");
-					this.OnOrasIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(8) NOT NULL", CanBeNull=false)]
-  [Required]
-  [MaxLength(10, ErrorMessage = "Maxim 3 cifre")]
-  public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Transport_Bilet", Storage="_Bilets", ThisKey="ID", OtherKey="TransportID")]
-		public EntitySet<Bilet> Bilets
-		{
-			get
-			{
-				return this._Bilets;
-			}
-			set
-			{
-				this._Bilets.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ora_Transport", Storage="_Ora", ThisKey="OrasID", OtherKey="ID", IsForeignKey=true)]
-		public Ora Ora
-		{
-			get
-			{
-				return this._Ora.Entity;
-			}
-			set
-			{
-				Ora previousValue = this._Ora.Entity;
-				if (((previousValue != value) 
-							|| (this._Ora.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Ora.Entity = null;
-						previousValue.Transports.Remove(this);
-					}
-					this._Ora.Entity = value;
-					if ((value != null))
-					{
-						value.Transports.Add(this);
-						this._OrasID = value.ID;
-					}
-					else
-					{
-						this._OrasID = default(int);
-					}
-					this.SendPropertyChanged("Ora");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Bilets(Bilet entity)
-		{
-			this.SendPropertyChanging();
-			entity.Transport = this;
-		}
-		
-		private void detach_Bilets(Bilet entity)
-		{
-			this.SendPropertyChanging();
-			entity.Transport = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GMS")]
-	public partial class GM : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private int _OrasID;
-		
-		private short _GMS;
-		
-		private EntitySet<Bilet> _Bilets;
-		
-		private EntityRef<Ora> _Ora;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnOrasIDChanging(int value);
-    partial void OnOrasIDChanged();
-    partial void OnGMSChanging(short value);
-    partial void OnGMSChanged();
-    #endregion
-		
-		public GM()
-		{
-			this._Bilets = new EntitySet<Bilet>(new Action<Bilet>(this.attach_Bilets), new Action<Bilet>(this.detach_Bilets));
-			this._Ora = default(EntityRef<Ora>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrasID", DbType="Int NOT NULL")]
-		public int OrasID
-		{
-			get
-			{
-				return this._OrasID;
-			}
-			set
-			{
-				if ((this._OrasID != value))
-				{
-					if (this._Ora.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnOrasIDChanging(value);
-					this.SendPropertyChanging();
-					this._OrasID = value;
-					this.SendPropertyChanged("OrasID");
-					this.OnOrasIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GMS", DbType="SmallInt NOT NULL")]
-  [MaxLength(3, ErrorMessage ="Maxim 3 cifre")]
-		public short GMS
-		{
-			get
-			{
-				return this._GMS;
-			}
-			set
-			{
-				if ((this._GMS != value))
-				{
-					this.OnGMSChanging(value);
-					this.SendPropertyChanging();
-					this._GMS = value;
-					this.SendPropertyChanged("GMS");
-					this.OnGMSChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GM_Bilet", Storage="_Bilets", ThisKey="ID", OtherKey="GMSID")]
-		public EntitySet<Bilet> Bilets
-		{
-			get
-			{
-				return this._Bilets;
-			}
-			set
-			{
-				this._Bilets.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ora_GM", Storage="_Ora", ThisKey="OrasID", OtherKey="ID", IsForeignKey=true)]
-		public Ora Ora
-		{
-			get
-			{
-				return this._Ora.Entity;
-			}
-			set
-			{
-				Ora previousValue = this._Ora.Entity;
-				if (((previousValue != value) 
-							|| (this._Ora.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Ora.Entity = null;
-						previousValue.GMs.Remove(this);
-					}
-					this._Ora.Entity = value;
-					if ((value != null))
-					{
-						value.GMs.Add(this);
-						this._OrasID = value.ID;
-					}
-					else
-					{
-						this._OrasID = default(int);
-					}
-					this.SendPropertyChanged("Ora");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Bilets(Bilet entity)
-		{
-			this.SendPropertyChanging();
-			entity.GM = this;
-		}
-		
-		private void detach_Bilets(Bilet entity)
-		{
-			this.SendPropertyChanging();
-			entity.GM = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Locatie")]
-	public partial class Locatie : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private int _OrasID;
-		
-		private string _Name;
-		
-		private EntityRef<Ora> _Ora;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnOrasIDChanging(int value);
-    partial void OnOrasIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public Locatie()
-		{
-			this._Ora = default(EntityRef<Ora>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrasID", DbType="Int NOT NULL")]
-		public int OrasID
-		{
-			get
-			{
-				return this._OrasID;
-			}
-			set
-			{
-				if ((this._OrasID != value))
-				{
-					if (this._Ora.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnOrasIDChanging(value);
-					this.SendPropertyChanging();
-					this._OrasID = value;
-					this.SendPropertyChanged("OrasID");
-					this.OnOrasIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
-  [Required]
-  [MaxLength(100, ErrorMessage = "Maxim 3 cifre")]
-  public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ora_Locatie", Storage="_Ora", ThisKey="OrasID", OtherKey="ID", IsForeignKey=true)]
-		public Ora Ora
-		{
-			get
-			{
-				return this._Ora.Entity;
-			}
-			set
-			{
-				Ora previousValue = this._Ora.Entity;
-				if (((previousValue != value) 
-							|| (this._Ora.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Ora.Entity = null;
-						previousValue.Locaties.Remove(this);
-					}
-					this._Ora.Entity = value;
-					if ((value != null))
-					{
-						value.Locaties.Add(this);
-						this._OrasID = value.ID;
-					}
-					else
-					{
-						this._OrasID = default(int);
-					}
-					this.SendPropertyChanged("Ora");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }

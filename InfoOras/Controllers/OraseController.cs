@@ -6,62 +6,63 @@ using System.Net.Http;
 using System.Web.Http;
 using InfoOras.Models;
 using System.Runtime.Serialization;
-using System.ServiceModel;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using System.Text;
 using System.IO;
 using System.Runtime.Remoting.Contexts;
+using InfoOras.DTO;
 
-
-namespace Orase.Controllers
+namespace InfoOras.Controllers
 {
 
  public class OraseController : ApiController
  {
   private IOrasRepository _oras;
-  //public OraseController() : this(new OrasRepository()) { }
+  public OraseController() : this(new OrasRepository()) { }
   public OraseController(IOrasRepository oras)
   {
    _oras = oras;
   }
-   
+
   [HttpGet]
   public IHttpActionResult GetOrase()
   {
-   IList<Ora> city = _oras.ListAll();
+   IList<OrasViewModel> city = _oras.ListAll();
    return Ok(city);
- // IEnumerable<OraseModels> city = citiesDBML.Oras.Select(o => new OraseModels { ID = o.ID, Orase = o.Oras, Lat = o.Lat, Long = o.Long, JudetID = o.JudetID, Judet1 = o.Judet.Judet1 }).AsEnumerable();
-   //return city;
-   
   }
+  [HttpGet]
   public IHttpActionResult Get(int id)
   {
    Ora oraid = _oras.GetID(id);
-   if(oraid == null)
+   if (oraid == null)
    {
     return NotFound();
    }
    return Ok(oraid);
   }
-
-  public IHttpActionResult Post(Ora ora) {
+  [HttpPost]
+  public IHttpActionResult Post(EntryDto ora) {
    if (!ModelState.IsValid)
    {
     return BadRequest(ModelState);
    }
-
-   _oras.Add(ora);
-   return Created(Url.Link("DefaultApi", new { controller = "Orase", Id = ora.ID}), ora);
-
-  }
-  public IHttpActionResult Put(int id) {
+   Ora or = ora.toModel();
   
-   return null;
+   _oras.Add(or);
+   or.ID = ora.ID;
+   return Created(Url.Link("DefaultApi", null), ora);
+
   }
-  public Ora Delete(int id) {
-   
-   return null;
+  [HttpPut]
+  public IHttpActionResult PutID(int id, Ora ora) {
+  Ora oras = _oras.Update(id);
+   return StatusCode(System.Net.HttpStatusCode.NoContent);
+  }
+  [HttpDelete]
+  public IHttpActionResult Delete(int id) {
+   Ora oraDelete = _oras.Delete(id);
+   return Ok(oraDelete);
   }
  }
 }

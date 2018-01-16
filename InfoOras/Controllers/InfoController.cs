@@ -32,17 +32,7 @@ namespace InfoOras.Controllers
         // GET: Info/Create
         public ActionResult Create()
         {
-   //listOra = dbml.Oras.OrderBy(x => x.Judet.Judet1).ToList();
-   //List<SelectListItem> li = new List<SelectListItem>();
-   //foreach (Ora list in listOra) {
-   // li.Add(new SelectListItem
-   // {
-   //  Text = list.Judet.Judet1,
-   //  Value = list.Judet.ID
-   // });
-   //}
 
-   //ViewData["Judet"] = li;
    List<Judet> judet = dbml.Judets.OrderBy(x => x.Judet1).ToList();
    ViewData["Judet"] = new SelectList(judet, "ID", "Judet1");
    return View();

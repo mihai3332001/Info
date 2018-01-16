@@ -1,30 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="City" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=M-A;Initial Catalog=City;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CityConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Judet" Member="Judets">
-    <Type Name="Judet">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Judet" Member="Judet1" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
-      <Association Name="Judet_Ora" Member="Oras" ThisKey="ID" OtherKey="JudetID" Type="Ora" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Oras" Member="Oras">
-    <Type Name="Ora">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="JudetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Oras" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Column Name="Lat" Type="System.Decimal" DbType="Decimal(12,9)" CanBeNull="true" />
-      <Column Name="Long" Type="System.Decimal" DbType="Decimal(12,9)" CanBeNull="true" />
-      <Association Name="Ora_Transport" Member="Transports" ThisKey="ID" OtherKey="OrasID" Type="Transport" />
-      <Association Name="Ora_GM" Member="GMs" ThisKey="ID" OtherKey="OrasID" Type="GM" />
-      <Association Name="Ora_Locatie" Member="Locaties" ThisKey="ID" OtherKey="OrasID" Type="Locatie" />
-      <Association Name="Judet_Ora" Member="Judet" ThisKey="JudetID" OtherKey="ID" Type="Judet" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Bilet" Member="Bilets">
     <Type Name="Bilet">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="GMSID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TransportID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TransportID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Pret" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
       <Column Name="Timp" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
       <Association Name="Transport_Bilet" Member="Transport" ThisKey="TransportID" OtherKey="ID" Type="Transport" IsForeignKey="true" />
@@ -49,12 +29,32 @@
       <Association Name="Ora_GM" Member="Ora" ThisKey="OrasID" OtherKey="ID" Type="Ora" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Judet" Member="Judets">
+    <Type Name="Judet">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Judet" Member="Judet1" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+      <Association Name="Judet_Ora" Member="Oras" ThisKey="ID" OtherKey="JudetID" Type="Ora" />
+    </Type>
+  </Table>
   <Table Name="dbo.Locatie" Member="Locaties">
     <Type Name="Locatie">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="OrasID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
       <Association Name="Ora_Locatie" Member="Ora" ThisKey="OrasID" OtherKey="ID" Type="Ora" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Oras" Member="Oras">
+    <Type Name="Ora">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="JudetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Oras" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="Lat" Type="System.Decimal" DbType="Decimal(12,9)" CanBeNull="true" />
+      <Column Name="Long" Type="System.Decimal" DbType="Decimal(12,9)" CanBeNull="true" />
+      <Association Name="Ora_Transport" Member="Transports" ThisKey="ID" OtherKey="OrasID" Type="Transport" />
+      <Association Name="Ora_GM" Member="GMs" ThisKey="ID" OtherKey="OrasID" Type="GM" />
+      <Association Name="Ora_Locatie" Member="Locaties" ThisKey="ID" OtherKey="OrasID" Type="Locatie" />
+      <Association Name="Judet_Ora" Member="Judet" ThisKey="JudetID" OtherKey="ID" Type="Judet" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

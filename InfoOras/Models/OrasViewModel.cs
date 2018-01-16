@@ -21,6 +21,5 @@ namespace InfoOras.Models
   public decimal? Long { get; set; }
   public string Judet { get; set; }
 
-  public IEnumerable<Transport> Trnm { get; set; }
  }
 }
