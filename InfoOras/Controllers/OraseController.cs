@@ -55,14 +55,20 @@ namespace InfoOras.Controllers
 
   }
   [HttpPut]
-  public IHttpActionResult PutID(int id, Ora ora) {
-  Ora oras = _oras.Update(id);
-   return StatusCode(System.Net.HttpStatusCode.NoContent);
+  public IHttpActionResult PutID(int id, EntryDto ora) {
+   if (!ModelState.IsValid)
+   {
+    return BadRequest(ModelState);
+   }
+   Ora or = ora.toModel();
+   _oras.Update(id, or);
+   or.ID = ora.ID;
+   return Ok(or);
   }
   [HttpDelete]
   public IHttpActionResult Delete(int id) {
    Ora oraDelete = _oras.Delete(id);
-   return Ok(oraDelete);
+   return StatusCode(System.Net.HttpStatusCode.NoContent);
   }
  }
 }

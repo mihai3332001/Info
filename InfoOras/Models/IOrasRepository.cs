@@ -11,7 +11,7 @@ namespace InfoOras.Models
   IList<OrasViewModel> ListAll();
   Ora GetID(int id);
   Ora Add(Ora ora);
-  Ora Update(int id);
+  Ora Update(int id, Ora ora);
   Ora Delete(int id);
  }
 }

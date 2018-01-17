@@ -23,15 +23,14 @@ namespace InfoOras.Models
    return oras;
   }
 
-  public Ora Update(int id)
+  public Ora Update(int id, Ora ora)
   {
    Ora oras = dbmlOras.Oras.Where(o => o.ID == id).FirstOrDefault();
-   Ora ora = new Ora();
-   ora.ID = oras.ID;
-   ora.Oras = oras.Oras;
-   ora.Lat = oras.Lat;
-   ora.Long = oras.Long;
-   ora.JudetID = oras.JudetID;
+   oras.ID = ora.ID;
+   oras.Oras = ora.Oras;
+   oras.Lat = ora.Lat;
+   oras.Long = ora.Long;
+   oras.JudetID = ora.JudetID;
    dbmlOras.SubmitChanges();
    return oras;
   }
@@ -39,9 +38,10 @@ namespace InfoOras.Models
   public Ora Delete(int id)
   {
    Ora oras = dbmlOras.Oras.Where(o => o.ID == id).FirstOrDefault();
-   Ora ora = new Ora();
-   ora.ID = oras.ID;
-   dbmlOras.Oras.DeleteOnSubmit(ora);
+   //Ora ora = new Ora();
+   //ora.ID = oras.ID;
+   dbmlOras.Oras.DeleteOnSubmit(oras);
+   dbmlOras.SubmitChanges();
    return oras;
   }
 
