@@ -8,7 +8,7 @@ namespace InfoOras.Models
 {
  public interface IOrasRepository
  {
-  IList<OrasViewModel> ListAll();
+  IList<Ora> ListAll();
   Ora GetID(int id);
   Ora Add(Ora ora);
   Ora Update(int id, Ora ora);

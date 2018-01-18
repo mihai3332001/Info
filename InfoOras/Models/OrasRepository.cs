@@ -14,8 +14,8 @@ namespace InfoOras.Models
   {
    dbmlOras = new DataClasses1DataContext();
   }
-  public IList<OrasViewModel> ListAll(){
-   List<OrasViewModel> orase = dbmlOras.Oras.Select(o => new OrasViewModel { ID = o.ID, Judet = o.Judet.Judet1, Oras = o.Oras, JudetID = o.JudetID, Lat = o.Lat, Long = o.Long }).ToList();
+  public IList<Ora> ListAll(){
+   List<Ora> orase = dbmlOras.Oras.ToList();
    return orase;
   }
   public Ora GetID(int id) {

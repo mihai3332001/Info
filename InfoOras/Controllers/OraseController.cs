@@ -28,7 +28,7 @@ namespace InfoOras.Controllers
   [HttpGet]
   public IHttpActionResult GetOrase()
   {
-   IList<OrasViewModel> city = _oras.ListAll();
+   IList<Ora> city = _oras.ListAll();
    return Ok(city);
   }
   [HttpGet]

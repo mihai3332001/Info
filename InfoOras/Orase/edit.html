@@ -1,0 +1,37 @@
+﻿<h3>
+ {{ Oras }}
+</h3>
+<hr />
+<form role="form" style="max-width: 500px;">
+ <strong class="error">{{ error }}</strong>
+ <div class="form-group">
+  <label for="oras">
+   Oras
+  </label>
+  <input type="text" class="form-control" id="oras" ng-model="oras" />
+ </div>
+ <div class="form-group">
+  <label for="lat">
+   Lat:
+  </label>
+  <input type="text" class="form-control" id="lat" ng-model="lat" />
+ </div>
+ <div class="form-group">
+  <label for="long">
+   Long:
+  </label>
+  <input type="text" class="form-control" id="long" ng-model="long" />
+ </div>
+ <div class="form-group">
+  <label for="country">
+   Judet:
+  </label>
+  <select class="form-control" id="Judete" ng-model="Judete" ng-options="judet.jud for judet in judets" >
+
+  </select>
+ </div>
+ <a href="/list" class="btn btn-info">Back to List</a>
+ <button type="submit" class="btn btn-default" ng-click="save()">
+  Submit
+ </button>
+</form>  
