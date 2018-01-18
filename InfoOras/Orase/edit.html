@@ -26,8 +26,9 @@
   <label for="country">
    Judet:
   </label>
-  <select class="form-control" id="Judete" ng-model="Judete" ng-options="judet.jud for judet in judets" >
-
+  <select class="form-control" id="Judete" 
+      ng-options="option.jud for option in judets.availableOptions track by option.judID"
+      ng-model="judets.selectedOptions[0]">
   </select>
  </div>
  <a href="/list" class="btn btn-info">Back to List</a>

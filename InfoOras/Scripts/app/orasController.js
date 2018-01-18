@@ -18,12 +18,24 @@ OrasController.controller("EditController", ['$scope', '$http', '$routeParams',
             if (judet) {
                 $http.get('/api/orase').then(function (response) {
                    var judSearch = response.data;
-                   $scope.judets = judSearch.map(function (item) {
-                        return {
-                            jud: item.judet.judet1
-                        }
+                   $scope.judets = {
+                       model: null,
+                       availableOptions: 
+                       judSearch.map(function (item) {
+                           return {
+                               jud: item.judet.judet1,
+                               judID: item.judetID
+                           }
+                       })
+                   };
+                   var keys = $scope.judets.availableOptions;
+
+                   $scope.judets.availableOptions = keys.filter(function (value, index) { return keys.indexOf(value) == index });
+                   $scope.judets.selectedOptions =  keys.filter(function (item) {
+                       if (item.judID == judet) {
+                          return  item.jud;
+                       }
                    });
-                   $scope.Judete = $scope.judets[0];
                 });
             } else {
                 $scope.judet = null;
