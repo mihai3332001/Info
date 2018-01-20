@@ -1,22 +1,32 @@
 ﻿var OrasApp = angular.module('OrasApp', ['ngRoute', 'OrasController']);
+
 OrasApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
     $routeProvider.when('/list',
         {
-            templateUrl: 'Orase/list.html',
-            controller: 'ListController'
-
+            controller: 'ListController',
+            templateUrl: 'Orase/list.html'
         }).
         when('/create',
         {
-            templateUrl: 'Orase/edit.html',
-            controller: 'EditController'
+            controller: 'EditController',
+            templateUrl: 'Orase/edit.html'
         }).
         when('/edit/:id',
         {
-            templateUrl: 'Orase/edit.html',
-            controller: 'EditController'
-        }).  
+            controller: 'EditController',
+            templateUrl: 'Orase/edit.html'
+        }).
+        when('/view/:id',
+        {
+            controller: 'ViewController',
+            templateUrl: 'Orase/view.html'
+        }).
+        when('/delete/:id',
+            {
+                controller: 'DeleteController',
+                templateUrl: 'Orase/delete.html'
+            }).
         otherwise({
             redirectTo: '/list'
         });

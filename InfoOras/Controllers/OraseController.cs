@@ -12,10 +12,11 @@ using System.Text;
 using System.IO;
 using System.Runtime.Remoting.Contexts;
 using InfoOras.DTO;
+using System.Web.Http.Cors;
 
 namespace InfoOras.Controllers
 {
-
+ 
  public class OraseController : ApiController
  {
   private IOrasRepository _oras;
