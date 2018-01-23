@@ -33,6 +33,20 @@ OrasController.controller("ViewController", ['$scope', '$http', '$routeParams',
       
     }]);
 
+
+OrasController.controller("DeleteController", ['$scope', '$http', '$routeParams',
+    function ($scope, $http, $routeParams) {
+        $http.get('api/orase' + $routeParams).then(function (response) {
+            $scope.orase = response.data;
+            $scope.id = $routeParams.id;
+        });
+        if ($scope.id != 0) {
+            $http.delete('/api/orase' + $scope.id).then(function (response) {
+
+            });
+        }
+    }]);
+
 OrasController.controller("EditController", ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
         $http.get('/api/orase').then(function (response) {
@@ -51,13 +65,13 @@ OrasController.controller("EditController", ['$scope', '$http', '$routeParams',
             if ($scope.id === 0) {
              
                 $http.post('/api/orase', obj).then(function (response) {
-                   
-                })
+
+                });
             }
             else {
-                $http.put('/api/orase/:id' , obj).then(function (response) {
-                  
-                })
+                $http.put('/api/orase/:id', obj).then(function (response) {
+
+                });
             }
         }
         $scope.id = 0;

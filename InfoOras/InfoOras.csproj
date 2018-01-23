@@ -198,6 +198,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Orase\delete.html" />
     <Content Include="Orase\edit.html" />
     <Content Include="Orase\list.html" />
     <Content Include="Orase\view.html" />
