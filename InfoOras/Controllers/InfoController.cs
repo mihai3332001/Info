@@ -15,7 +15,7 @@ namespace InfoOras.Controllers
   // GET: Info
   public ActionResult Index()
         {
-   listOra = dbml.Oras.OrderBy(x=>x.Oras).ToList();
+        listOra = dbml.Oras.OrderBy(x=>x.Oras).ToList();
             return View(listOra);
         }
 

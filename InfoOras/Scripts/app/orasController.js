@@ -13,7 +13,7 @@ OrasController.controller("ViewController", ['$scope', '$http', '$routeParams',
         $http.get('/api/orase').then(function (response) {
             $scope.orase = response.data;
         });
-        if ($routeParams != 0) {
+        if ($routeParams !== 0) {
             $scope.id = $routeParams.id;
             $scope.title = "Edit Oras";
             $http.get('/api/orase/' + $routeParams.id).then(function (response) {
@@ -40,7 +40,7 @@ OrasController.controller("DeleteController", ['$scope', '$http', '$routeParams'
             $scope.orase = response.data;
             $scope.id = $routeParams.id;
         });
-        if ($scope.id != 0) {
+        if ($scope.id !== 0) {
             $http.delete('/api/orase' + $scope.id).then(function (response) {
 
             });
