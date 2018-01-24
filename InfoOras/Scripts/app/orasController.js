@@ -13,24 +13,34 @@ OrasController.controller("ViewController", ['$scope', '$http', '$routeParams',
         $http.get('/api/orase').then(function (response) {
             $scope.orase = response.data;
         });
-        if ($routeParams !== 0) {
-            $scope.id = $routeParams.id;
+        if ($routeParams.id !== 0) {
             $scope.title = "Edit Oras";
             $http.get('/api/orase/' + $routeParams.id).then(function (response) {
                 $scope.oras = response.data.oras;
                 $scope.lat = response.data.lat;
                 $scope.long = response.data.long;
                 $scope.judetID = response.data.judetID;
-                $scope.fnSearchAddress();
             }); 
             }  
-        $scope.fnSearchAddress = function () {
-            $http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + $scope.lat + ',' + $scope.long + '&key=AIzaSyAain2buFvPPmMXoAMwqpBf4RobTJnpYmk')
-                .then(function (mapData) {
-                    $scope.mapData = mapData.data.results;
-                });       
-        }
       
+    }]);
+
+OrasController.controller("TransportListController", ['$scope', '$http', '$routeParams',
+    function ($scope, $http, $routeParams) {
+        $http.get('/api/orase').then(function (response) {
+            if ($routeParams.id !== 0) {
+                $scope.title = "Transport in comun";
+                $scope.transports = response.data;
+            }
+        });
+        if ($routeParams.id !== 0) {
+            $scope.title = "Transport in comun";
+            $http.get('/api/orase/' + $routeParams.id).then(function (response) {
+                $scope.oras = response.data.oras;
+                $scope.transports = response.data;             
+            });
+        }
+
     }]);
 
 

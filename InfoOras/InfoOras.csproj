@@ -201,6 +201,7 @@
     <Content Include="Orase\delete.html" />
     <Content Include="Orase\edit.html" />
     <Content Include="Orase\list.html" />
+    <Content Include="Orase\transport.html" />
     <Content Include="Orase\view.html" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
