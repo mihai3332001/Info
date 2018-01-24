@@ -34,21 +34,24 @@ OrasController.controller("ViewController", ['$scope', '$http', '$routeParams',
     }]);
 
 
-OrasController.controller("DeleteController", ['$scope', '$http', '$routeParams',
-    function ($scope, $http, $routeParams) {
-        $http.get('api/orase' + $routeParams).then(function (response) {
-            $scope.orase = response.data;
-            $scope.id = $routeParams.id;
+OrasController.controller("DeleteController", ['$scope', '$http', '$routeParams', '$location',
+    function ($scope, $http, $routeParams, $location) {
+        $http.get('api/orase/' + $routeParams.id).then(function (response) {
+            $scope.oras = response.data.oras;
+            $scope.lat = response.data.lat;
+            $scope.long = response.data.long;
         });
-        if ($scope.id !== 0) {
-            $http.delete('/api/orase' + $scope.id).then(function (response) {
-
-            });
-        }
+        $scope.delete = function () {
+            if ($routeParams.id !== 0) {
+                $http.delete('/api/orase/' + $routeParams.id).then(function (response) {
+                    $location.path('/list');
+                });
+            }
+        };
     }]);
 
-OrasController.controller("EditController", ['$scope', '$http', '$routeParams',
-    function ($scope, $http, $routeParams) {
+OrasController.controller("EditController", ['$scope', '$http', '$routeParams', '$location',
+    function ($scope, $http, $routeParams, $location) {
         $http.get('/api/orase').then(function (response) {
             $scope.orase = response.data;
         });
@@ -65,12 +68,12 @@ OrasController.controller("EditController", ['$scope', '$http', '$routeParams',
             if ($scope.id === 0) {
              
                 $http.post('/api/orase', obj).then(function (response) {
-
+                    $location.path('/list');
                 });
             }
             else {
-                $http.put('/api/orase/:id', obj).then(function (response) {
-
+                $http.put('/api/orase/' + $scope.id, obj).then(function (response) {
+                    $location.path('/list');
                 });
             }
         }
