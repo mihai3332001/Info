@@ -1,6 +1,6 @@
 ﻿
 <div>
- <a href="/create" class="btn">Create</a>
+ <a href="/transportNew" class="btn">Create</a>
 </div>
 <div class="table-responsive">
  <h3>{{oras}}</h3>
@@ -13,10 +13,10 @@
   <tr ng-repeat="transport in transports.transports">
    <td>{{ transport.name }}</td>
    <td>
-    <a href="/edit/{{oras.id}}" class="glyphicon glyphicon-edit"></a>
+    <a href="/transportEdit/{{transport.id}}" class="glyphicon glyphicon-edit"></a>
    </td>
    <td>
-    <a href="/delete/{{oras.id}}" class="glyphicon glyphicon-trash"></a>
+    <a href="/delete/transport/{{transport.id}}" class="glyphicon glyphicon-trash"></a>
    </td>
   </tr>
  </table>

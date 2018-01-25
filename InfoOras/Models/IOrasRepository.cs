@@ -14,4 +14,12 @@ namespace InfoOras.Models
   Ora Update(int id, Ora ora);
   Ora Delete(int id);
  }
+
+ public interface ITransportRepository {
+  IList<Transport> TransportAll();
+  Transport GetTransportID(int id);
+  Transport AddTransport(Transport trans);
+  Transport UpdateTransport(int id, Transport name);
+  //Transport Delete(int id);
+ }
 }

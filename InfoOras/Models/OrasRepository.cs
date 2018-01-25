@@ -56,6 +56,6 @@ namespace InfoOras.Models
    //dbmlOras.Oras.Where(x => x.Oras == oras.Oras).FirstOrDefault();
    return oras;
   }
- 
  }
+
 }

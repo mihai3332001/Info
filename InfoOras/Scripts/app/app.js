@@ -32,6 +32,16 @@ OrasApp.config(['$routeProvider', '$locationProvider', function ($routeProvider,
             controller: 'TransportListController',
             templateUrl: 'Orase/transport.html'
         }).
+        when('/transportEdit/:id',
+        {
+            controller: 'TransportEditController',
+            templateUrl: 'Orase/transportEdit.html'
+        }).
+        when('/transportNew',
+        {
+            controller: 'TransportListController',
+            templateUrl: 'Orase/transportNew.html'
+        }).
         otherwise({
             redirectTo: '/list'
         });

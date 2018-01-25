@@ -28,18 +28,58 @@ OrasController.controller("ViewController", ['$scope', '$http', '$routeParams',
 OrasController.controller("TransportListController", ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
         $http.get('/api/orase').then(function (response) {
-            if ($routeParams.id !== 0) {
-                $scope.title = "Transport in comun";
-                $scope.transports = response.data;
-            }
         });
         if ($routeParams.id !== 0) {
             $scope.title = "Transport in comun";
             $http.get('/api/orase/' + $routeParams.id).then(function (response) {
                 $scope.oras = response.data.oras;
-                $scope.transports = response.data;             
+                $scope.transports = response.data;
             });
         }
+        else if ($scope.transports.id === 0) {
+            $scope.orasID = response.data;
+        }
+
+    }]);
+
+OrasController.controller("TransportEditController", ['$scope', '$http', '$routeParams', '$location',
+    function ($scope, $http, $routeParams, $location) {
+        $http.get('/api/transport').then(function (response) {
+            $scope.transports = response.data;
+        });
+        if ($routeParams.id) {
+            $scope.id = $routeParams.id;
+            $http.get('/api/transport/' + $routeParams.id).then(function (response) {
+                $scope.name = response.data.name;
+                $scope.oras = response.data.ora.oras;
+                $scope.orasID = response.data.orasID;
+            });
+        }
+        else {
+            $http.get('/api/orase/').then(function (response) {
+                $scope.orasID = response.data;
+            });
+        }
+        $scope.save = function () {
+            //$scope.id = 0;
+            var objTransport = {
+                Id: $scope.id,
+                Name: $scope.name,
+                OrasID: $scope.orasID
+            }
+            if (objTransport.Id === "underfined") {
+
+                $http.post('/api/transport', objTransport).then(function (response) {
+                    $location.search('/transport/' + OrasID);
+                });
+            }
+            else {
+                $http.put('/api/transport/' + $scope.id, objTransport).then(function (response) {
+                    id = $scope.orasID;
+                    $location.path('/transport/' + id);
+                });
+            }
+          }
 
     }]);
 
