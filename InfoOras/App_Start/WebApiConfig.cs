@@ -12,12 +12,8 @@ namespace InfoOras
     {
         public static void Register(HttpConfiguration config)
         {
-   // Web API configuration and services
 
-   // Web API routes
-   //config.MapHttpAttributeRoutes();
-   config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
-= Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+   config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
    var cors = new EnableCorsAttribute("*", "accept,accesstoken,authorization,cache-control,pragma,content-type,origin", "GET,PUT,POST,DELETE,TRACE,HEAD,OPTIONS");
    config.EnableCors(cors);
    config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

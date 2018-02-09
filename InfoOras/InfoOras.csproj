@@ -204,6 +204,7 @@
     <Content Include="Orase\edit.html" />
     <Content Include="Orase\list.html" />
     <Content Include="Orase\transport.html" />
+    <Content Include="Orase\transportDelete.html" />
     <Content Include="Orase\transportEdit.html" />
     <Content Include="Orase\transportNew.html" />
     <Content Include="Orase\view.html" />

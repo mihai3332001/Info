@@ -39,7 +39,8 @@ namespace InfoOras.Controllers
    return Created(Url.Link("DefaultApi", null), trans);
 
   }
-  public IHttpActionResult Put(int id, Transport trans)
+  [HttpPut]
+  public IHttpActionResult PutID(int id, Transport trans)
   {
    if (!ModelState.IsValid)
    {
@@ -48,6 +49,12 @@ namespace InfoOras.Controllers
    _transport.UpdateTransport(id, trans);
    return Ok(trans);
 
+  }
+  [HttpDelete]
+  public IHttpActionResult Delete(int id)
+  {
+   _transport.DeleteTransport(id);
+   return StatusCode(System.Net.HttpStatusCode.NoContent);
   }
  }
 }

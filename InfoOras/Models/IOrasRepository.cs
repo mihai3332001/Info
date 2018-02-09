@@ -20,6 +20,6 @@ namespace InfoOras.Models
   Transport GetTransportID(int id);
   Transport AddTransport(Transport trans);
   Transport UpdateTransport(int id, Transport name);
-  //Transport Delete(int id);
+  Transport DeleteTransport(int id);
  }
 }

@@ -35,5 +35,11 @@ namespace InfoOras.Models
    dbmlTransport.SubmitChanges();
    return newTrans;
   }
+  public Transport DeleteTransport(int id) {
+   Transport newTrans = dbmlTransport.Transports.Where(t => t.ID == id).FirstOrDefault();
+   dbmlTransport.Transports.DeleteOnSubmit(newTrans);
+   dbmlTransport.SubmitChanges();
+   return newTrans;
+  }
  }
 }

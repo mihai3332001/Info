@@ -12,6 +12,7 @@ OrasController.controller("ViewController", ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
         $http.get('/api/orase').then(function (response) {
             $scope.orase = response.data;
+
         });
         if ($routeParams.id !== 0) {
             $scope.title = "Edit Oras";
@@ -25,19 +26,21 @@ OrasController.controller("ViewController", ['$scope', '$http', '$routeParams',
       
     }]);
 
-OrasController.controller("TransportListController", ['$scope', '$http', '$routeParams',
-    function ($scope, $http, $routeParams) {
+OrasController.controller("TransportListController", ['$scope', '$rootScope', '$http', '$routeParams', 
+    function ($scope, $rootScope, $http, $routeParams) {
         $http.get('/api/orase').then(function (response) {
+          
         });
         if ($routeParams.id !== 0) {
             $scope.title = "Transport in comun";
             $http.get('/api/orase/' + $routeParams.id).then(function (response) {
                 $scope.oras = response.data.oras;
                 $scope.transports = response.data;
+                $rootScope.items = response.data.id;
             });
         }
         else if ($scope.transports.id === 0) {
-            $scope.orasID = response.data;
+            $scope.orasID = response.data.id;
         }
 
     }]);
@@ -46,43 +49,57 @@ OrasController.controller("TransportEditController", ['$scope', '$http', '$route
     function ($scope, $http, $routeParams, $location) {
         $http.get('/api/transport').then(function (response) {
             $scope.transports = response.data;
+           $scope.orasID = $scope.items;
         });
         if ($routeParams.id) {
-            $scope.id = $routeParams.id;
             $http.get('/api/transport/' + $routeParams.id).then(function (response) {
                 $scope.name = response.data.name;
                 $scope.oras = response.data.ora.oras;
-                $scope.orasID = response.data.orasID;
+                $scope.orasID = response.data.orasID;             
             });
         }
-        else {
-            $http.get('/api/orase/').then(function (response) {
-                $scope.orasID = response.data;
-            });
-        }
+
         $scope.save = function () {
-            //$scope.id = 0;
+           
             var objTransport = {
-                Id: $scope.id,
+                ID: $routeParams.id,
                 Name: $scope.name,
                 OrasID: $scope.orasID
             }
-            if (objTransport.Id === "underfined") {
-
-                $http.post('/api/transport', objTransport).then(function (response) {
-                    $location.search('/transport/' + OrasID);
-                });
-            }
-            else {
-                $http.put('/api/transport/' + $scope.id, objTransport).then(function (response) {
+            if ($routeParams.id !== 0) {
+                $http.put('/api/transport/' + $routeParams.id, objTransport).then(function (response) {
                     id = $scope.orasID;
                     $location.path('/transport/' + id);
                 });
+               
+            }
+            else {
+                $http.post('/api/transport', objTransport).then(function (response) {
+                    id = $scope.orasID;
+                    $location.path('/transport/' + id);
+                }).then(function (response) {
+                    console.log($http.put);
+                });          
             }
           }
 
     }]);
 
+
+OrasController.controller("TransportDeleteController", ['$scope', '$http', '$rootScope', '$routeParams', '$location',
+    function ($scope, $http, $rootScope, $routeParams, $location) {
+        $http.get('api/transport/' + $routeParams.id).then(function (response) {
+            $scope.Name = response.data.name;
+            $scope.orasID = response.data.orasID;
+        });
+        $scope.delete = function () {
+            if ($routeParams.id !== 0) {
+                $http.delete('/api/transport/' + $routeParams.id).then(function (response) {
+                    $location.path('/transport/' + $scope.orasID);
+                });
+            }
+        };
+    }]);
 
 OrasController.controller("DeleteController", ['$scope', '$http', '$routeParams', '$location',
     function ($scope, $http, $routeParams, $location) {
