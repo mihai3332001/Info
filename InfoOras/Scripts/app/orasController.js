@@ -55,31 +55,29 @@ OrasController.controller("TransportEditController", ['$scope', '$http', '$route
             $http.get('/api/transport/' + $routeParams.id).then(function (response) {
                 $scope.name = response.data.name;
                 $scope.oras = response.data.ora.oras;
+                $scope.transportID = response.data.id;
                 $scope.orasID = response.data.orasID;             
             });
         }
 
-        $scope.save = function () {
-           
+        $scope.submit = function ()   {
             var objTransport = {
-                ID: $routeParams.id,
+                ID: $scope.transportID,
                 Name: $scope.name,
                 OrasID: $scope.orasID
-            }
-            if ($routeParams.id !== 0) {
-                $http.put('/api/transport/' + $routeParams.id, objTransport).then(function (response) {
-                    id = $scope.orasID;
-                    $location.path('/transport/' + id);
-                });
-               
-            }
-            else {
+            };
+
+            if ($routeParams.id === undefined) {
                 $http.post('/api/transport', objTransport).then(function (response) {
                     id = $scope.orasID;
                     $location.path('/transport/' + id);
-                }).then(function (response) {
-                    console.log($http.put);
-                });          
+                });            
+            }
+            else {
+                $http.put('/api/transport/' + $routeParams.id, objTransport).then(function (response) {
+                    id = $scope.orasID;
+                    $location.path('/transport/' + id);
+                });                 
             }
           }
 

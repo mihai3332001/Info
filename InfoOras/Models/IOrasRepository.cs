@@ -22,4 +22,21 @@ namespace InfoOras.Models
   Transport UpdateTransport(int id, Transport name);
   Transport DeleteTransport(int id);
  }
+
+public interface IGMSRepository
+    {
+        IList<GM> GMSALL();
+        GM GetGms(int id);
+        GM AddGms(GM gm);
+        GM UpdateGM(int id, GM gm);
+        GM DeleteGM(int id);
+    }
+public interface ILocationRepository
+    {
+        IList<Locatie> GetLocations();
+        Locatie GetIdLocation(int id);
+        Locatie AddLocation(Locatie loc);
+        Locatie UpdateLocation(int id, Locatie loc);
+        Locatie DeleteLocation(int id);
+    }
 }

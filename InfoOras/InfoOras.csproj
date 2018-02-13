@@ -168,10 +168,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\GMController.cs" />
     <Compile Include="Controllers\GmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\LocatieController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\OraseController.cs" />
     <Compile Include="Controllers\TramsportController.cs" />
     <Compile Include="Controllers\TransportController.cs" />
@@ -185,7 +187,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\GMSRepository.cs" />
     <Compile Include="Models\IOrasRepository.cs" />
+    <Compile Include="Models\LocationRepository.cs" />
     <Compile Include="Models\OrasRepository.cs" />
     <Compile Include="Models\OrasViewModel.cs" />
     <Compile Include="Models\TransportRepository.cs" />
@@ -247,6 +251,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include=".bin\node.cmd" />
     <None Include="Models\DataClasses1.dbml.layout">
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </None>

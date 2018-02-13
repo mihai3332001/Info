@@ -51,7 +51,7 @@ namespace InfoOras.Models
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["CityConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["CityConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
