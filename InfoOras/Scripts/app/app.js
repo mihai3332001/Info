@@ -27,10 +27,10 @@ OrasApp.config(['$routeProvider', '$locationProvider', function ($routeProvider,
                 controller: 'DeleteController',
                 templateUrl: 'Orase/delete.html'
         }).
-        when('/transport/:id',
+        when('/orasDetails/:id',
         {
             controller: 'TransportListController',
-            templateUrl: 'Orase/transport.html'
+            templateUrl: 'Orase/orasDetails.html'
         }).
         when('/transportEdit/:id',
         {
@@ -46,6 +46,36 @@ OrasApp.config(['$routeProvider', '$locationProvider', function ($routeProvider,
         {
             controller: 'TransportDeleteController',
             templateUrl: 'Orase/transportDelete.html'
+        }).
+        when('/GMSNew',
+        {
+            controller: 'GMSEditController',
+            templateUrl: 'Orase/GMSNew.html'
+        }).
+        when('/GMSEdit/:id',
+        {
+            controller: 'GMSEditController',
+            templateUrl: 'Orase/GMSEdit.html'
+        }).
+        when('/GMSDelete/:id',
+        {
+            controller: 'GMSDeleteController',
+            templateUrl: 'Orase/GMSDelete.html'
+        }).
+        when('/LocationNew',
+        {
+            controller: 'LocationEditController',
+            templateUrl: 'Orase/LocationNew.html'
+        }).
+        when('/LocationEdit/:id',
+        {
+            controller: 'LocationEditController',
+            templateUrl: 'Orase/LocationEdit.html'
+        }).
+        when('/LocationDelete/:id',
+        {
+            controller: 'LocationDeleteController',
+            templateUrl: 'Orase/LocationDelete.html'
         }).
         otherwise({
             redirectTo: '/list'

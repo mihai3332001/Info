@@ -206,8 +206,14 @@
     <Content Include="Content\Site.css" />
     <Content Include="Orase\delete.html" />
     <Content Include="Orase\edit.html" />
+    <Content Include="Orase\GMSDelete.html" />
+    <Content Include="Orase\GMSEdit.html" />
+    <Content Include="Orase\GMSNew.html" />
     <Content Include="Orase\list.html" />
-    <Content Include="Orase\transport.html" />
+    <Content Include="Orase\LocationDelete.html" />
+    <Content Include="Orase\LocationEdit.html" />
+    <Content Include="Orase\LocationNew.html" />
+    <Content Include="Orase\orasDetails.html" />
     <Content Include="Orase\transportDelete.html" />
     <Content Include="Orase\transportEdit.html" />
     <Content Include="Orase\transportNew.html" />

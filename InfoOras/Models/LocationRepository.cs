@@ -44,6 +44,8 @@ namespace InfoOras.Models
         public Locatie DeleteLocation(int id)
         {
            Locatie delLoc =  getIDLocation(id);
+            dbmlLocation.Locaties.DeleteOnSubmit(delLoc);
+            dbmlLocation.SubmitChanges();
             return delLoc;
         }
 

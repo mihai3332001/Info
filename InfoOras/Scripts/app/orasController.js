@@ -45,44 +45,6 @@ OrasController.controller("TransportListController", ['$scope', '$rootScope', '$
 
     }]);
 
-OrasController.controller("TransportEditController", ['$scope', '$http', '$routeParams', '$location',
-    function ($scope, $http, $routeParams, $location) {
-        $http.get('/api/transport').then(function (response) {
-            $scope.transports = response.data;
-           $scope.orasID = $scope.items;
-        });
-        if ($routeParams.id) {
-            $http.get('/api/transport/' + $routeParams.id).then(function (response) {
-                $scope.name = response.data.name;
-                $scope.oras = response.data.ora.oras;
-                $scope.transportID = response.data.id;
-                $scope.orasID = response.data.orasID;             
-            });
-        }
-
-        $scope.submit = function ()   {
-            var objTransport = {
-                ID: $scope.transportID,
-                Name: $scope.name,
-                OrasID: $scope.orasID
-            };
-
-            if ($routeParams.id === undefined) {
-                $http.post('/api/transport', objTransport).then(function (response) {
-                    id = $scope.orasID;
-                    $location.path('/transport/' + id);
-                });            
-            }
-            else {
-                $http.put('/api/transport/' + $routeParams.id, objTransport).then(function (response) {
-                    id = $scope.orasID;
-                    $location.path('/transport/' + id);
-                });                 
-            }
-          }
-
-    }]);
-
 
 OrasController.controller("TransportDeleteController", ['$scope', '$http', '$rootScope', '$routeParams', '$location',
     function ($scope, $http, $rootScope, $routeParams, $location) {
@@ -93,7 +55,159 @@ OrasController.controller("TransportDeleteController", ['$scope', '$http', '$roo
         $scope.delete = function () {
             if ($routeParams.id !== 0) {
                 $http.delete('/api/transport/' + $routeParams.id).then(function (response) {
-                    $location.path('/transport/' + $scope.orasID);
+                    $location.path('/orasDetails/' + $scope.orasID);
+                });
+            }
+        };
+    }]);
+
+OrasController.controller("TransportEditController", ['$scope', '$http', '$routeParams', '$location',
+    function ($scope, $http, $routeParams, $location) {
+        $http.get('/api/transport').then(function (response) {
+
+            $scope.transports = response.data;
+            $scope.orasID = $scope.items;
+        });
+        if ($routeParams.id) {
+            $http.get('/api/transport/' + $routeParams.id).then(function (response) {
+                $scope.name = response.data.name;
+                $scope.oras = response.data.ora.oras;
+                $scope.transportID = response.data.id;
+                $scope.orasID = response.data.orasID;
+            });
+        }
+
+        $scope.submit = function () {
+            var objTransport = {
+                ID: $scope.transportID,
+                Name: $scope.name,
+                OrasID: $scope.orasID
+            };
+
+            if ($routeParams.id === undefined) {
+                $http.post('/api/transport', objTransport).then(function (response) {
+                    id = $scope.orasID;
+                    $location.path('/orasDetails/' + id);
+                });
+            }
+            else {
+                $http.put('/api/transport/' + $routeParams.id, objTransport).then(function (response) {
+                    id = $scope.orasID;
+                    $location.path('/orasDetails/' + id);
+                });
+            }
+        }
+
+    }]);
+
+
+OrasController.controller("GMSEditController", ['$scope', '$http', '$routeParams', '$location',
+    function ($scope, $http, $routeParams, $location) {
+        $http.get('/api/gm').then(function (response) {
+
+            $scope.gm = response.data;
+            $scope.orasID = $scope.items;
+        });
+        if ($routeParams.id) {
+            $http.get('/api/gm/' + $routeParams.id).then(function (response) {
+                $scope.name = response.data.gms;
+                $scope.oras = response.data.ora.oras;
+                $scope.gmsID = response.data.id;
+                $scope.orasID = response.data.orasID;
+            });
+        }
+
+        $scope.submit = function () {
+            var objGMS = {
+                ID: $scope.orasID,
+                GMS: $scope.name,
+                OrasID: $scope.orasID
+            };
+
+            if ($routeParams.id === undefined) {
+                $http.post('/api/gm', objGMS).then(function (response) {
+                    id = $scope.orasID;
+                    $location.path('/orasDetails/' + id);
+                });
+            }
+            else {
+                $http.put('/api/gm/' + $routeParams.id, objGMS).then(function (response) {
+                    id = $scope.orasID;
+                    $location.path('/orasDetails/' + id);
+                });
+            }
+        }
+
+    }]);
+
+
+
+
+OrasController.controller("GMSDeleteController", ['$scope', '$http', '$rootScope', '$routeParams', '$location',
+    function ($scope, $http, $rootScope, $routeParams, $location) {
+        $http.get('api/gm/' + $routeParams.id).then(function (response) {
+            $scope.gms = response.data.gms;
+            $scope.orasID = response.data.orasID;
+        });
+        $scope.delete = function () {
+            if ($routeParams.id !== 0) {
+                $http.delete('/api/gm/' + $routeParams.id).then(function (response) {
+                    $location.path('/orasDetails/' + $scope.orasID);
+                });
+            }
+        };
+    }]);
+
+OrasController.controller("LocationEditController", ['$scope', '$http', '$routeParams', '$location',
+    function ($scope, $http, $routeParams, $location) {
+        $http.get('/api/location').then(function (response) {
+
+            $scope.location = response.data;
+            $scope.orasID = $scope.items;
+        });
+        if ($routeParams.id) {
+            $http.get('/api/location/' + $routeParams.id).then(function (response) {
+                $scope.name = response.data.name;
+                $scope.oras = response.data.ora.oras;
+                $scope.locationID = response.data.id;
+                $scope.orasID = response.data.orasID;
+            });
+        }
+
+        $scope.submit = function () {
+            var objLocation = {
+                ID: $scope.orasID,
+                Name: $scope.name,
+                OrasID: $scope.orasID
+            };
+
+            if ($routeParams.id === undefined) {
+                $http.post('/api/location', objLocation).then(function (response) {
+                    id = $scope.orasID;
+                    $location.path('/orasDetails/' + id);
+                });
+            }
+            else {
+                $http.put('/api/location/' + $routeParams.id, objLocation).then(function (response) {
+                    id = $scope.orasID;
+                    $location.path('/orasDetails/' + id);
+                });
+            }
+        }
+
+    }]);
+
+
+OrasController.controller("LocationDeleteController", ['$scope', '$http', '$rootScope', '$routeParams', '$location',
+    function ($scope, $http, $rootScope, $routeParams, $location) {
+        $http.get('api/location/' + $routeParams.id).then(function (response) {
+            $scope.name = response.data.name;
+            $scope.orasID = response.data.orasID;
+        });
+        $scope.delete = function () {
+            if ($routeParams.id !== 0) {
+                $http.delete('/api/location/' + $routeParams.id).then(function (response) {
+                    $location.path('/orasDetails/' + $scope.orasID);
                 });
             }
         };
